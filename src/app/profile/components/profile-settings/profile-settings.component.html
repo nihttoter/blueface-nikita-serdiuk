@@ -1,0 +1,30 @@
+<div>
+  <h1>{{ title }}</h1>
+  <ng-container *ngIf="user$ | async as user; else loading">
+    <div>
+      <p>Username: {{ this.formGroup.get("username").value }}</p>
+    </div>
+    <div>
+      <label> First Name: </label>
+      <input type="text" [formControl]="this.formGroup.get('firstName')" />
+    </div>
+    <div>
+      <label> Last Name: </label>
+      <input type="text" [formControl]="this.formGroup.get('lastName')" />
+    </div>
+    <div>
+      <label> Email: </label>
+      <input type="text" [formControl]="this.formGroup.get('email')" />
+    </div>
+    <div>
+      <input type="button" value="Save" (click)="saveProfile()" />
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <p>Loading profile...</p>
+  </ng-template>
+
+  <p *ngIf="savingProfile">Saving profile...</p>
+  <p *ngIf="savingProfileError">Error! {{ savingProfileError }}</p>
+</div>
